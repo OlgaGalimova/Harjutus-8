@@ -1,42 +1,4 @@
 
-#from tkinter import *
-#from math import sdrt
-
-#root = Tk() #окно
-#root.geometry("600x800")  #размер окна
-#root.title("Квадратные уравнения")  #заголовок
-#root.iconbitmap("travel.ico")  #размер иконки (книга) - 248 
-#f = Frame(root, border=50, height=50, width=600) #f-рамка(указываем все свойства для дизайна)
-#f_all = Frame(root, bg="#f44336", border=50, height=200, width=600)  #нижняя рамка (frame)
-#t = "Решение квадратного уравнения"
-#l = Label(f, text=t, bg="#99c2e8", fg="#008000", font="Algerian 16", height=3, width=len(t))  # надпись в заголовке. Label - автоматически появляется текст
-#f_top=Frame(root)
-#f_button=Frame(root)
-#a = Entry(f_top, width=5, bg="#99c2e8", font="Arial 15") #Entry - сами вводим текст
-#a.pack(side=LEFT, padx=10, padx=10)
-
-
-#a_lab=Label(f_top, text="x**2+", fond="Arial 15"
-
-#b = Entry (f_top,bg="#99c2e8", font="Arial 15")
-#b.pack(side=LEFT, pady=10)
-
-
-#c_lab=Label (f_top, text="0", fond="Arial 15")
-#c.pack(side=LEFT, pady=10)
-
-#btn=Button(f_top, text="Решить", fond="Arial 12 bolt")
-
-
-
-#f.pack()  # Упаковка рамки
-#l.pack()  # Упаковка надписи в заголовке 
-#f_top.pack()
-#f_button.pack()
-
-
-#root.mainloop()  #самая последняя команда!  майн - запуск, лооп - повторение программы. самая последняя команда 
-
 from tkinter import *
 
 root = Tk()  # Окно
