@@ -1,54 +1,81 @@
 
-from tkinter import *
+from tkinter import * #графические интерфейсы
 
-root = Tk()  # Окно
-root.geometry("600x800")  # Размер окна
-root.title("Квадратные уравнения")  # Заголовок
-root.iconbitmap("travel.ico")  # Иконка окна (книга) - 248
+from math import * #математические функции
 
-f = Frame(root, border=50, height=50, width=600)  # Рамка
-f_all = Frame(root, border=50, height=200, width=600)  # Нижняя рамка
+def solve_quadratic():# коэффициенты квадратного уравнения a, b и c, вычисляет его дискриминант
+    a_val = a.get() #get -возврат текста который ввел пользователь в Entry
+    b_val = b.get()
+    c_val = c.get()
+
+    if a_val and b_val and c_val:
+        a_val = float(a_val)
+        b_val = float(b_val)
+        c_val = float(c_val)
+
+        discriminant = b_val**2 - 4*a_val*c_val
+
+        if discriminant > 0:
+            x1 = (-b_val + sqrt(discriminant)) / (2*a_val)
+            x2 = (-b_val - sqrt(discriminant)) / (2*a_val)
+            result = f"D = {round(discriminant, 2)}\nx1 = {round(x1, 2)}\nx2 = {round(x2, 2)}"
+        elif discriminant == 0:
+            x = -b_val / (2*a_val)
+            result = f"D = {round(discriminant, 2)}\nОдин корень: x = {round(x, 2)}"
+        else:
+            result = "Нет действительных корней"
+
+        output.config(text=result)
+    else:
+        output.config(text="Поля должны быть заполнены")
+        if not a_val:
+            a.configure(bg="red")
+        if not b_val:
+            b.configure(bg="red")
+        if not c_val:
+            c.configure(bg="red")
+
+
+root = Tk() #Создает главное окно приложения
+root.geometry("600x500")#Задает размеры главного окна приложения
+root.title("Квадратные уравнения")#Устанавливает заголовок для главного окна
+root.iconbitmap("travel.ico")#Устанавливает иконку для главного окна приложения
+
+f = Frame(root, border=50, height=50, width=600)# Создает рамку в главном окне приложения
+f_all = Frame(root, border=50, height=200, width=600)#Создает еще одну рамку в главном окне
+#Label - отображает текст или изображение на экране
 t = "Решение квадратного уравнения"
-l = Label(f, text=t, bg="#99c2e8", fg="#008000", font="Arial 16", height=3, width=len(t))  # Надпись
+l = Label(root, text=t, bg="#99c2e8", fg="#008000", font="Arial 16", height=3, width=len(t))
+l.pack()
 
-t_top = Frame(root)  # Верхняя рамка
-t_button = Frame(root)  # Рамка для кнопок
-t_bot = Frame(root)  # Нижняя рамка  
+t_top = Frame(root)#Создает рамку  в верхней части главного окна.
+t_top.pack()
 
-a = Entry(t_top, width=5, bg="#99c2e8", font="Arial 15")  # Поле для ввода коэффициента перед x^2
+a = Entry(t_top, width=5, bg="#99c2e8", font="Arial 15")# вводить текст с клавиатуры. 
 a.pack(side=LEFT, padx=0, pady=0)
 
-b_lab = Label(t_top, text="x**2 +",fg="#008000", font="Arial 15")  # Метка для ввода x**2
+b_lab = Label(t_top, text="x**2 +", fg="#008000", font="Arial 15")
 b_lab.pack(side=LEFT, padx=10, pady=10)
-b = Entry(t_top, width=5, bg="#99c2e8", font="Arial 15")  # Поле для ввода коэффициента перед x^2
+b = Entry(t_top, width=5, bg="#99c2e8", font="Arial 15")
 b.pack(side=LEFT, padx=10, pady=10)
 
-
-c_lab = Label(t_top, text="x +", fg="#008000",font="Arial 15")  # Метка для ввода b
-c_lab.pack(side=LEFT,pady=10)
-c = Entry(t_top, width=5, bg="#99c2e8", font="Arial 15")  # Поле для ввода коэффициента перед x^2
+c_lab = Label(t_top, text="x +", fg="#008000", font="Arial 15")
+c_lab.pack(side=LEFT, pady=10)
+c = Entry(t_top, width=5, bg="#99c2e8", font="Arial 15")
 c.pack(side=LEFT, padx=10, pady=10)
 
-d_lab = Label(t_top, text="=0",fg="#008000", font="Arial 15")  # Метка для ввода c
+d_lab = Label(t_top, text="=0", fg="#008000", font="Arial 15")
 d = Entry(t_top, width=5, bg="#99c2e8", font="Arial 15")
 d_lab.pack(side=LEFT, padx=10, pady=10)
 
-
-btn = Button(t_top, text="Решить", font="Arial 12 bold", bg="#008000") # Кнопка для решения уравнения
+btn = Button(t_top, text="Решить", font="Arial 12 bold", bg="#008000", command=solve_quadratic)
 btn.pack(side=RIGHT, padx=10, pady=10)
 
-##output.geometry("600x800")  # Размер окна
-##output = Text(t_bot, bg="yellow", fg="black", font="Arial 10")  # Вывод
-##output.pack(expand=1, fill=BOTH, side=LEFT)  # Размещение текстового поля по центру
-#output = Text(root, bg="yellow", fg="black", font="Arial 10", width=5, height=5)  # Вывод, размеры 600x800
-#output.pack(expand=1, fill=BOTH)  # Размещение текстового поля на всю доступную область
+output_lab_bottom = Label(root, text="...", font="Arial 12 bold", width=5)
+output_lab_bottom.pack(side='bottom')
 
+output = Button(root, text=" ", font="Arial 12 bold", bg="yellow", width=40)
+output.pack(fill='y')
 
-f.pack()  # Упаковка рамки
-l.pack()  # Упаковка надписи в заголовке 
+root.mainloop()#Запускает цикл обработки событий
 
-t_top.pack()  # Упаковка верхней рамки
-t_button.pack() # Упаковка рамки для кнопок
-t_bot.pack()  # Упаковка нижней рамки
-
-root.mainloop()  # Главный цикл программы
